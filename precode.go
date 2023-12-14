@@ -9,7 +9,6 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-// Сделал константы чтобы избежать возможных ошибок. Или так не принято делать?)
 const (
 	contentType = "Content-Type"
 	appJson     = "application/json"
@@ -57,7 +56,10 @@ func getTasks(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set(contentType, appJson)
 	w.WriteHeader(http.StatusOK)
-	w.Write(resp)
+	_, err = w.Write(resp)
+	if err != nil {
+		fmt.Printf("Ошибка при записи ответа.\n")
+	}
 }
 
 // Получение задачи по идентификатору
@@ -78,7 +80,10 @@ func getTaskById(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set(contentType, appJson)
 	w.WriteHeader(http.StatusOK)
-	w.Write(resp)
+	_, err = w.Write(resp)
+	if err != nil {
+		fmt.Printf("Ошибка при записи ответа.\n")
+	}
 }
 
 // Добавление новой задачи
