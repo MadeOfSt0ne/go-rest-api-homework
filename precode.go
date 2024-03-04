@@ -58,11 +58,7 @@ func getTasks(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	_, err = w.Write(resp)
 	if err != nil {
-<<<<<<< HEAD
 		fmt.Printf("Ошибка при записи ответа: %v.\n", err)
-=======
-		fmt.Printf("Ошибка при записи ответа.\n")
->>>>>>> refs/remotes/origin/dev
 	}
 }
 
@@ -86,11 +82,7 @@ func getTaskById(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	_, err = w.Write(resp)
 	if err != nil {
-<<<<<<< HEAD
 		fmt.Printf("Ошибка при записи ответа: %v.\n", err)
-=======
-		fmt.Printf("Ошибка при записи ответа.\n")
->>>>>>> refs/remotes/origin/dev
 	}
 }
 
