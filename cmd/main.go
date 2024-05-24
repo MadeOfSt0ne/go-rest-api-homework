@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"go-rest-api/models"
+
 	"github.com/go-chi/chi/v5"
 )
 
@@ -14,15 +16,7 @@ const (
 	appJson     = "application/json"
 )
 
-// Структура задачи
-type Task struct {
-	ID           string   `json:"id"`
-	Description  string   `json:"description"`
-	Note         string   `json:"note"`
-	Applications []string `json:"applications"`
-}
-
-var tasks = map[string]Task{
+var tasks = map[string]models.Task{
 	"1": {
 		ID:          "1",
 		Description: "Сделать финальное задание темы REST API",
@@ -35,7 +29,7 @@ var tasks = map[string]Task{
 	},
 	"2": {
 		ID:          "2",
-		Description: "Протестировать финальное задание с помощью Postmen",
+		Description: "Протестировать финальное задание с помощью Postman",
 		Note:        "Лучше это делать в процессе разработки, каждый раз, когда запускаешь сервер и проверяешь хендлер",
 		Applications: []string{
 			"VS Code",
@@ -88,7 +82,7 @@ func getTaskById(w http.ResponseWriter, r *http.Request) {
 
 // Добавление новой задачи
 func postTask(w http.ResponseWriter, r *http.Request) {
-	var task Task
+	var task models.Task
 	var buf bytes.Buffer
 
 	_, err := buf.ReadFrom(r.Body)
@@ -132,7 +126,7 @@ func main() {
 	r.Post(`/tasks`, postTask)
 	r.Delete(`/tasks/{id}`, deleteTask)
 
-	if err := http.ListenAndServe(":8080", r); err != nil {
+	if err := http.ListenAndServe(":3000", r); err != nil {
 		fmt.Printf("Ошибка при запуске сервера: %s", err.Error())
 		return
 	}
